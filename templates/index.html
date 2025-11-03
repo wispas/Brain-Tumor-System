@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Medical Assistant</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS via Flask -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2 class="brand-title">Profile</h2>
+      <p class="brand-subtitle">Online</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="active"><a href="#"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fas fa-stethoscope"></i> Patient Records</a></li>
+        <li><a href="#"><i class="fas fa-user-md"></i> Doctors</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Emergency Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <h4>Subscribe for updates</h4>
+      <form class="subscribe-form">
+        <input type="email" placeholder="Your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="copyright">© 2025 Medical Assistant</p>
+    </div>
+  </aside>
+
+  <!-- Page Container -->
+  <div class="page-container">
+    <header>
+      <div class="header-row">
+        <div class="logo">
+          <div class="logo-icon">
+            <span class="cross">+</span>
+          </div>
+          <span class="logo-text">LOGO</span>
+        </div>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Patients Records</a></li>
+            <li><a href="#">Doctors</a></li>
+            <li><a href="#"> Emergency Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="content-left">
+        <h2 class="main-heading">
+          <span class="orange">Hello:</span> <span class="blue">....</span>
+        </h2>
+
+        <p class="description">
+          Collect complete patient data and upload relevant diagnostic images (MRI/CT) for intelligent analysis.
+        </p>
+
+        <!-- Button to go to test page -->
+        <button id="goTest" class="btn-primary">Patient Diagnosis </button>
+
+        <div class="feature-box">
+          <div class="feature-icon">
+            <span class="shield-cross">+</span>
+          </div>
+          <div class="feature-text">
+            <h4>Manual Diagnosis</h4>
+            <p>Upload the MRI image to perform a Manual Diagnosis </p>
+            <button id="goTest" class="btn-primary">Upload </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-right">
+        <div class="illustration">
+          <!-- ✅ Correct Flask path for image -->
+          <img src="{{ url_for('static', filename='images/doctor-illustration.png') }}" alt="Doctor illustration">
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript for Button Navigation -->
+  <script>
+    document.getElementById('goTest').addEventListener('click', function() {
+      window.location.href = "{{ url_for('test') }}";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ML-Based Brain Tumor Test Data Collection</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Flask static path for CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}" />
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="test-header">
+    <div class="logo">🧠 ML-Based Brain Tumor Assistant</div>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('test') }}" class="active">Test Form</a>
+      <a href="{{ url_for('upload') }}">Upload</a>
+    </nav>
+  </header>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <!-- ✅ Update: route now handled by app.py -->
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('test') }}">
+      
+      <!-- Section I -->
+      <section class="form-section">
+        <h2>Section I. Demographics and Contact Information</h2>
+        <div class="form-grid">
+          <label>Full Name <input type="text" name="fullname" required></label>
+          <label>Phone Number <input type="tel" name="phone" required></label>
+          <label>Email <input type="email" name="email"></label>
+          <label>Address <input type="text" name="address"></label>
+          <label>Emergency Contact Name <input type="text" name="emergency_name"></label>
+          <label>Relationship <input type="text" name="relationship"></label>
+          <label>Emergency Phone <input type="tel" name="emergency_phone"></label>
+          <label>Gender 
+            <select name="gender">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+              <option>Prefer Not to Say</option>
+            </select>
+          </label>
+          <label>Date of Birth <input type="date" name="dob"></label>
+          <label>Age <input type="number" name="age"></label>
+          <label>Patient ID/MRN <input type="text" name="patient_id"></label>
+        </div>
+      </section>
+
+      <!-- Section II -->
+      <section class="form-section">
+        <h2>Section II. Clinical History</h2>
+        <label>Chief Complaint(s)
+          <textarea name="chief_complaint" rows="2"></textarea>
+        </label>
+        <label>Detailed Symptom Description
+          <textarea name="symptom_description" rows="3"></textarea>
+        </label>
+
+        <div class="checkbox-group">
+          <span>Neurological Symptoms:</span>
+          <label><input type="checkbox" name="symptoms" value="Seizures"> Seizures</label>
+          <label><input type="checkbox" name="symptoms" value="Vision Changes"> Vision Changes</label>
+          <label><input type="checkbox" name="symptoms" value="Weakness"> Weakness</label>
+          <label><input type="checkbox" name="symptoms" value="Cognitive Changes"> Cognitive Changes</label>
+          <label><input type="checkbox" name="symptoms" value="Speech Difficulties"> Speech Difficulties</label>
+        </div>
+
+        <label>Onset and Duration
+          <select name="onset_duration">
+            <option>Acute</option>
+            <option>Subacute</option>
+            <option>Chronic</option>
+            <option>Rapidly Progressive</option>
+            <option>Stable</option>
+          </select>
+        </label>
+
+        <label>Prior Neurological Exam Findings
+          <textarea name="neurological_exam" rows="2"></textarea>
+        </label>
+      </section>
+
+      <!-- Section III -->
+      <section class="form-section">
+        <h2>Section III. Medical Background</h2>
+        <div class="checkbox-group">
+          <span>Past Medical History:</span>
+          <label><input type="checkbox" name="history" value="Previous Cancers"> Previous Cancers</label>
+          <label><input type="checkbox" name="history" value="Neurological Disorders"> Neurological Disorders</label>
+          <label><input type="checkbox" name="history" value="Immunosuppression"> Immunosuppression</label>
+        </div>
+        <label>Current Medications, Allergies (incl. contrast agents)
+          <textarea name="medications" rows="2"></textarea>
+        </label>
+        <label>Surgical History
+          <textarea name="surgical_history" rows="2"></textarea>
+        </label>
+      </section>
+
+      <!-- Section IV -->
+      <section class="form-section">
+        <h2>Section IV. Family and Social History</h2>
+        <label>Family History of Cancer
+          <select name="family_history">
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </label>
+        <label>If Yes, provide details
+          <textarea name="family_details" rows="2"></textarea>
+        </label>
+
+        <label>Smoking Status
+          <select name="smoking_status">
+            <option>Current</option>
+            <option>Former</option>
+            <option>Never</option>
+          </select>
+        </label>
+        <label>Alcohol Use
+          <select name="alcohol_use">
+            <option>Daily</option>
+            <option>Weekly</option>
+            <option>Occasionally</option>
+            <option>Never</option>
+          </select>
+        </label>
+        <label>Occupational Exposures
+          <input type="text" name="occupational_exposures">
+        </label>
+      </section>
+
+      <!-- Section V -->
+      <section class="form-section">
+        <h2>Section V. Core Test Data & Image Upload</h2>
+        <label>Imaging Modality
+          <select name="modality">
+            <option>MRI</option>
+            <option>CT</option>
+            <option>PET-CT</option>
+          </select>
+        </label>
+
+        <label>Specific MRI Sequence
+          <select name="sequence">
+            <option>T1</option>
+            <option>T1c</option>
+            <option>T2</option>
+            <option>FLAIR</option>
+            <option>DWI</option>
+          </select>
+        </label>
+
+        <!-- ✅ Opens upload.html page -->
+        <div class="upload-section">
+          <a href="{{ url_for('upload') }}" class="upload-btn">
+            <i class="fas fa-cloud-upload-alt"></i> Upload MRI/CT Scan Image
+          </a>
+        </div>
+
+        <label>Tumor Presence
+          <select name="tumor_presence">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </label>
+
+        <label>Tumor Type / Histology
+          <input type="text" name="tumor_type" placeholder="e.g., Glioblastoma, Meningioma">
+        </label>
+
+        <label>WHO Grade
+          <select name="who_grade">
+            <option>I</option>
+            <option>II</option>
+            <option>III</option>
+            <option>IV</option>
+          </select>
+        </label>
+      </section>
+
+      <button type="submit" class="submit-btn">Submit Test Data</button>
+    </form>
+
+    {% if message %}
+      <div class="message-box">{{ message }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>

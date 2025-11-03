@@ -1,0 +1,197 @@
+/* ===== Global ===== */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f3f8ff;
+  margin: 0;
+  padding: 40px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #3399ff;
+  margin-bottom: 30px;
+}
+
+/* ===== Container ===== */
+.form-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: auto;
+  padding: 30px 40px;
+}
+
+/* ===== Sections ===== */
+.form-section {
+  margin-bottom: 30px;
+  border-left: 4px solid #3399ff;
+  padding-left: 15px;
+}
+
+.form-section h2 {
+  color: #3399ff;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+/* ===== Input Fields ===== */
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #ff9933;
+  outline: none;
+}
+
+/* ===== Layout ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+/* ===== Checkboxes ===== */
+.checkbox-group {
+  margin-top: 10px;
+}
+
+.checkbox-group span {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #3399ff;
+}
+
+.checkbox-group label {
+  display: inline-block;
+  margin-right: 15px;
+  font-weight: normal;
+}
+
+/* ===== Upload Section ===== */
+.upload-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.upload-btn {
+  display: inline-block;
+  background-color: #ff9933;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+  background-color: #e6851f;
+}
+
+.upload-btn i {
+  margin-right: 8px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+/* ===== Submit Button ===== */
+.submit-btn {
+  display: block;
+  width: 100%;
+  background-color: #3399ff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #2a7bce;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px) {
+  body {
+    padding: 20px;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+
+  .upload-btn {
+    width: 100%;
+  }
+}
+.image-preview {
+  max-width: 200px;   /* limits width */
+  max-height: 200px;  /* limits height */
+  margin-top: 10px;
+  border-radius: 10px;
+  object-fit: cover;  /* keeps aspect ratio */
+  display: block;
+}
+/* ====== HEADER STYLING ====== */
+.test-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #181d22, #ff9933);
+  padding: 15px 30px;
+  color: white;
+  border-radius: 0 0 10px 10px;
+}
+
+.test-header h1 {
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.home-btn {
+  background-color: white;
+  color: #3399ff;
+  padding: 8px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.home-btn:hover {
+  background-color: #ff9933;
+  color: white;
+}
+
+.home-btn i {
+  font-size: 1.1rem;
+}

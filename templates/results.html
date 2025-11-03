@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analysis Results - Online Medical Assistant</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+</head>
+
+<body>
+  <header class="page-header">
+    <div class="logo">🧠 Online Medical Assistant</div>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('test') }}">Test Form</a>
+      <a href="{{ url_for('upload') }}">Upload</a>
+      <a href="{{ url_for('results') }}" class="active">Results</a>
+    </nav>
+  </header>
+
+  <main class="results-container">
+    <section class="result-card">
+      <h1>🧬 Diagnostic Analysis Results</h1>
+      <p class="patient-name">Patient: <strong>{{ patient_name }}</strong></p>
+      <p class="analysis-summary">Summary of Results:</p>
+
+      <div class="result-details">
+        <p><strong>Tumor Detected:</strong> {{ tumor_detected }}</p>
+        <p><strong>Confidence Score:</strong> {{ confidence_score }}%</p>
+        <p><strong>Recommendation:</strong> {{ recommendation }}</p>
+      </div>
+
+      <div class="actions">
+        <a href="{{ url_for('upload') }}" class="btn-secondary">🔁 Upload Another Scan</a>
+        <a href="{{ url_for('index') }}" class="btn-primary">🏠 Return to Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
