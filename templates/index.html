@@ -5,103 +5,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Online Medical Assistant</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS (CDN for testing) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script> -->
 
-  <!-- CSS via Flask -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
 </head>
 
-<body>
+<body class="flex bg-gray-100 min-h-screen text-gray-800">
+
   <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <h2 class="brand-title">Profile</h2>
-      <p class="brand-subtitle">Online</p>
+  <aside class="w-64 bg-gray-900 text-gray-100 flex flex-col justify-between p-6">
+    <div>
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-white">Profile</h2>
+        <p class="text-green-400 text-sm">Online</p>
+      </div>
+
+      <nav>
+        <ul class="space-y-2">
+          <li>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition-all">
+              <i class="fas fa-home"></i> Home
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-all">
+              <i class="fas fa-info-circle"></i> Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-all">
+              <i class="fas fa-stethoscope"></i> Patient Records
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-all">
+              <i class="fas fa-user-md"></i> Doctors
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-all">
+              <i class="fas fa-envelope"></i> Emergency Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
-    <nav class="sidebar-nav">
-      <ul>
-        <li class="active"><a href="#"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="#"><i class="fas fa-info-circle"></i> Dashboard</a></li>
-        <li><a href="#"><i class="fas fa-stethoscope"></i> Patient Records</a></li>
-        <li><a href="#"><i class="fas fa-user-md"></i> Doctors</a></li>
-        <li><a href="#"><i class="fas fa-envelope"></i> Emergency Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="sidebar-footer">
-      <h4>Subscribe for updates</h4>
-      <form class="subscribe-form">
-        <input type="email" placeholder="Your email" required>
-        <button type="submit">Subscribe</button>
+    <div class="mt-10 border-t border-gray-700 pt-4">
+      <h4 class="text-lg font-semibold mb-2">Subscribe for updates</h4>
+      <form class="flex flex-col gap-2">
+        <input type="email" placeholder="Your email" class="px-3 py-2 rounded bg-gray-800 border border-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 transition text-white px-3 py-2 rounded text-sm font-semibold">Subscribe</button>
       </form>
-      <p class="copyright">© 2025 Medical Assistant</p>
+      <p class="text-gray-500 text-xs mt-4">© 2025 Medical Assistant</p>
     </div>
   </aside>
 
-  <!-- Page Container -->
-  <div class="page-container">
-    <header>
-      <div class="header-row">
-        <div class="logo">
-          <div class="logo-icon">
-            <span class="cross">+</span>
-          </div>
-          <span class="logo-text">LOGO</span>
-        </div>
-
-        <nav>
-          <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Patients Records</a></li>
-            <li><a href="#">Doctors</a></li>
-            <li><a href="#"> Emergency Contact</a></li>
-          </ul>
-        </nav>
+  <!-- Main Page Container -->
+  <div class="flex-1 flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-md py-4 px-8 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="bg-blue-600 w-10 h-10 flex items-center justify-center text-white rounded-lg text-2xl font-bold">+</div>
+        <span class="text-xl font-bold text-gray-800">LOGO</span>
       </div>
+
+      <nav>
+        <ul class="flex gap-6 text-gray-600 font-medium">
+          <li><a href="#" class="hover:text-blue-600 transition">Home</a></li>
+          <li><a href="#" class="hover:text-blue-600 transition">Dashboard</a></li>
+          <li><a href="#" class="hover:text-blue-600 transition">Patient Records</a></li>
+          <li><a href="#" class="hover:text-blue-600 transition">Doctors</a></li>
+          <li><a href="#" class="hover:text-blue-600 transition">Emergency Contact</a></li>
+        </ul>
+      </nav>
     </header>
 
     <!-- Main Content -->
-    <main>
-      <div class="content-left">
-        <h2 class="main-heading">
-          <span class="orange">Hello:</span> <span class="blue">....</span>
+    <main class="flex flex-1 items-center justify-between px-12 py-10">
+      <div class="max-w-xl">
+        <h2 class="text-4xl font-bold mb-4">
+          <span class="text-orange-500">Hello:</span>
+          <span class="text-blue-600">...</span>
         </h2>
 
-        <p class="description">
+        <p class="text-gray-600 mb-6">
           Collect complete patient data and upload relevant diagnostic images (MRI/CT) for intelligent analysis.
         </p>
 
         <!-- Button to go to test page -->
-        <button id="goTest" class="btn-primary">Patient Diagnosis </button>
+        <button id="goTest" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition shadow-lg">
+          Patient Diagnosis
+        </button>
 
-        <div class="feature-box">
-          <div class="feature-icon">
-            <span class="shield-cross">+</span>
-          </div>
-          <div class="feature-text">
-            <h4>Manual Diagnosis</h4>
-            <p>Upload the MRI image to perform a Manual Diagnosis </p>
-            <button id="goTest" class="btn-primary">Upload </button>
+        <!-- Feature Box -->
+        <div class="mt-10 p-6 bg-gray-100 rounded-xl shadow flex items-start gap-4">
+          <div class="text-blue-600 text-3xl font-bold">+</div>
+          <div>
+            <h4 class="text-lg font-semibold text-gray-800">Manual Diagnosis</h4>
+            <p class="text-gray-600 mb-3">Upload the MRI image to perform a Manual Diagnosis.</p>
+            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium shadow transition">
+              Upload
+            </button>
           </div>
         </div>
       </div>
 
-      <div class="content-right">
-        <div class="illustration">
-          <!-- ✅ Correct Flask path for image -->
-          <img src="{{ url_for('static', filename='images/doctor-illustration.png') }}" alt="Doctor illustration">
-        </div>
+      <!-- Right Illustration -->
+      <div>
+        <img src="{{ url_for('static', filename='images/doctor-illustration.png') }}" alt="Doctor illustration" class="w-96">
       </div>
     </main>
   </div>
 
-  <!-- JavaScript for Button Navigation -->
+  <!-- JavaScript -->
   <script>
     document.getElementById('goTest').addEventListener('click', function() {
       window.location.href = "{{ url_for('test') }}";

@@ -1,0 +1,1 @@
+console.log("✅ TypeScript is now compiling correctly!");

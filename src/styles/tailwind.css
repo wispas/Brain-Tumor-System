@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* default base styles */
+@layer base {
+  /* apply the extended font utility to body */
+  body { @apply font-poppins bg-gray-50; }
+}
+
+/* add your custom styles below */
+
+/* <!-- add to your HTML head --> */
+/* <link rel="stylesheet" href="/dist/styles.css"> */
+
+/* Output file: static/css/tailwind.css
+   Build with: npm run build:css
+   During development: npm run watch:css
+*/
+
+/* Example component utilities */
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-500;
+  }
+  .btn-secondary {
+    @apply bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-400;
+  }
+}
