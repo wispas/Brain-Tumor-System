@@ -1,48 +1,56 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 const UploadPage = () => {
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
-    // Handle file selection
-    const handleFileChange = (event) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            setSelectedFile(file);
-            setPreviewUrl(URL.createObjectURL(file));
-            setResult(null);
+    const [confidence, setConfidence] = useState(null);
+    const [serverImageUrl, setServerImageUrl] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    // 👇 Show local preview before uploading
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files?.[0] || null;
+        setFile(selectedFile);
+        setResult(null);
+        setConfidence(null);
+        setServerImageUrl(null);
+        setError(null);
+        if (selectedFile) {
+            const preview = URL.createObjectURL(selectedFile);
+            setPreviewUrl(preview);
         }
     };
-    // Handle form submission
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (!selectedFile)
-            return alert("Please select an image first.");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!file) {
+            setError("Please select an image first!");
+            return;
+        }
         setLoading(true);
+        setError(null);
         const formData = new FormData();
-        formData.append("file", selectedFile);
+        formData.append("file", file);
         try {
-            const response = await fetch("http://127.0.0.1:5000/upload", {
+            const response = await fetch("http://127.0.0.1:5000/api/upload", {
                 method: "POST",
                 body: formData,
             });
-            const data = await response.text(); // Flask may return HTML
-            // Optional: parse response JSON if Flask returns JSON instead
-            // const data = await response.json();
-            // For now, just show HTML preview
+            if (!response.ok)
+                throw new Error(`Server error: ${response.status}`);
+            const data = await response.json();
             console.log("Response:", data);
-            // If you later change Flask to return JSON:
-            // setResult({ label: data.result, confidence: data.confidence });
+            setResult(data.result);
+            setConfidence(data.confidence);
+            setServerImageUrl("http://127.0.0.1:5000" + data.image_url);
         }
-        catch (error) {
-            console.error("Upload failed:", error);
+        catch (err) {
+            setError("Upload failed: " + err.message);
         }
         finally {
             setLoading(false);
         }
     };
-    return (_jsxs("div", { className: "flex flex-col items-center min-h-screen bg-gradient-to-br from-white to-blue-50 p-6", children: [_jsx("h1", { className: "text-3xl font-bold text-orange-500 mb-6", children: "\uD83E\uDDE0 Brain Tumor Detection" }), _jsxs("div", { className: "bg-white shadow-lg rounded-xl p-8 max-w-md w-full text-center transition-transform hover:scale-[1.01]", children: [_jsxs("form", { onSubmit: handleSubmit, children: [_jsx("input", { type: "file", accept: "image/*", onChange: handleFileChange, className: "border-2 border-dashed border-sky-500 w-full p-4 rounded-lg cursor-pointer mb-4 hover:border-orange-500 transition" }), previewUrl && (_jsx("img", { src: previewUrl, alt: "Preview", className: "max-w-xs mx-auto rounded-lg border-4 border-sky-400 mb-4" })), _jsxs("div", { className: "space-x-3 mt-4", children: [_jsxs("button", { type: "submit", className: "bg-orange-500 text-white px-5 py-2 rounded-full font-medium hover:bg-orange-500 transition", disabled: loading, children: ["Analyze Image", loading ? "Analyzing..." : "Analyze Image"] }), _jsx("a", { href: "/test", children: _jsx("button", { type: "button", className: "bg-orange-500 text-white px-5 py-2 rounded-full font-medium hover:bg-sky-500 transition", children: "\u2190 Back to Test Page" }) })] })] }), loading && (_jsx("div", { className: "border-4 border-gray-200 border-t-sky-500 rounded-full w-12 h-12 animate-spin mx-auto mt-6" })), result && (_jsxs("div", { className: "bg-gray-50 p-4 mt-6 rounded-lg shadow-inner", children: [_jsx("h2", { className: "text-xl text-sky-600 mb-2", children: "Results" }), _jsx("p", { children: _jsx("strong", { className: "text-orange-500", children: result.label }) }), _jsxs("p", { children: ["Confidence: ", result.confidence, "%"] })] }))] })] }));
+    return (_jsxs("div", { className: "flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6", children: [_jsx("h1", { className: "text-3xl font-bold mb-6 text-gray-800", children: "\uD83E\uDDE0 Brain Tumor Detection" }), _jsxs("form", { onSubmit: handleSubmit, className: "bg-white shadow-md rounded-2xl p-6 w-full max-w-md", children: [_jsx("input", { type: "file", accept: "image/*", onChange: handleFileChange, className: "border border-gray-300 rounded-md p-2 w-full mb-4" }), previewUrl && (_jsx("img", { src: previewUrl, alt: "Preview", className: "w-64 h-64 object-cover rounded-xl shadow-md mx-auto mb-4" })), _jsx("button", { type: "submit", disabled: loading, className: "bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full transition", children: loading ? "Analyzing..." : "Analyze Image" })] }), error && _jsx("p", { className: "text-red-500 mt-4", children: error }), serverImageUrl && (_jsxs("div", { className: "mt-8 text-center", children: [_jsx("img", { src: serverImageUrl, alt: "Uploaded", className: "w-64 h-64 object-cover rounded-xl shadow-md mx-auto" }), result && (_jsxs("div", { className: "mt-4", children: [_jsxs("h2", { className: "text-xl font-semibold text-gray-700", children: ["Result: ", result] }), _jsxs("p", { className: "text-gray-600", children: ["Confidence: ", confidence?.toFixed(2), "%"] })] }))] }))] }));
 };
 export default UploadPage;

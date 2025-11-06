@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, jsonify
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
+from keras.models import load_model
+from keras.preprocessing import image
 from flask_cors import CORS   # ✅ <-- NEW
 import numpy as np
 import os
@@ -57,11 +57,14 @@ def test():
     return render_template('test.html')
 
 # ----------------------------
-# 🧠 API route for React frontend
+# 🧠 Upload page and API route
 # ----------------------------
+@app.route('/upload', methods=['GET'])
+def upload():
+    return render_template('upload.html')
+
 @app.route('/upload', methods=['POST'])
 @app.route('/api/upload', methods=['POST'])
-
 def api_upload():
     file = request.files.get('file')
     if not file:
