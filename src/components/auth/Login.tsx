@@ -11,7 +11,6 @@ const Login: React.FC = () => {
   const { login, currentUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect if already logged in
   useEffect(() => {
     if (!authLoading && currentUser) {
       navigate('/', { replace: true });
@@ -30,7 +29,7 @@ const Login: React.FC = () => {
       setError('');
       setLoading(true);
       await login(email, password);
-      navigate('/'); // Redirect to main app after successful login
+      navigate('/');
     } catch (err: any) {
       setError(err.message || 'Failed to log in');
     } finally {
@@ -38,151 +37,114 @@ const Login: React.FC = () => {
     }
   };
 
-  // Show loading while checking auth state
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mb-4"></div>
           <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
   }
 
-  // Don't render login form if already authenticated (will redirect)
   if (currentUser) {
     return null;
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="w-full max-w-5xl grid md:grid-cols-2 gap-8 items-center">
-        {/* Left Side - Branding/Info */}
-        <div className="hidden md:flex md:flex-col md:justify-center">
-          <div className="mb-8">
-            <div className="flex justify-center md:justify-start mb-6">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-full shadow-lg">
-                <i className="fas fa-brain text-white text-4xl"></i>
-              </div>
-            </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4 text-center md:text-left">
-              Brain Tumor
-              <span className="text-blue-600 block">Detection System</span>
-            </h1>
-            <p className="text-lg text-gray-600 mb-8 text-center md:text-left">
-              Advanced AI-powered medical diagnosis platform for accurate brain tumor detection and analysis.
-            </p>
-            <div className="space-y-5 max-w-md mx-auto md:mx-0">
-              <div className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-shield-alt text-blue-600 text-lg"></i>
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-1">Secure & Reliable</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">Your data is protected with enterprise-grade security</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-microscope text-blue-600 text-lg"></i>
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-1">AI-Powered Analysis</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">Advanced machine learning for accurate diagnosis</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-user-md text-blue-600 text-lg"></i>
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-800 mb-1">Medical Professionals</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">Trusted by healthcare providers worldwide</p>
-                </div>
-              </div>
-            </div>
+    <div className="min-h-screen flex bg-white">
+      {/* Image Section - ONLY on desktop */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gray-50 items-center justify-center p-8">
+        <div className="text-center max-w-md">
+          <img
+            src="images/doctor.png"
+            alt="Brain Tumor System"
+            className="w-64 h-64 mx-auto rounded-xl shadow-md object-cover"
+          />
+          <div className="mt-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Welcome to Brain Tumor System
+            </h3>
+            <p className="text-gray-600">Medical Assistant</p>
           </div>
         </div>
+      </div>
 
-        {/* Right Side - Login Form */}
-        <div className="w-full max-w-md mx-auto md:mx-0">
-          <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 md:p-10">
-            {/* Mobile Header */}
-            <div className="md:hidden text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4 shadow-md">
-                <i className="fas fa-brain text-white text-3xl"></i>
+      {/* Form Section - Full width on mobile, half on desktop */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div className="w-full max-w-md"> {/* Remove mx-auto to use full available space */}
+          {/* Header */}
+          <div className="text-center mb-8">
+            {/* Mobile Logo - Only show on mobile */}
+            <div className="lg:hidden mb-6">
+              <div className="flex flex-col items-center">
+                <img
+                  src="images/doctor.png"
+                  alt="Brain Tumor System"
+                  className="w-16 h-16 rounded-lg shadow-sm mb-3"
+                />
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  Welcome to Brain Tumor System
+                </h3>
+                <p className="text-sm text-gray-600">Medical Assistant</p>
               </div>
-              <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                Brain Tumor System
-              </h1>
-              <p className="text-gray-600">Sign in to your account</p>
             </div>
+            
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Brain Tumor System</h1>
+            <p className="text-lg text-gray-600 mb-2">Start your journey</p>
+            <h2 className="text-2xl font-semibold text-gray-900">Sign In</h2>
+          </div>
 
-            {/* Desktop Header */}
-            <div className="hidden md:block mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
-              <p className="text-gray-600">Sign in to continue to your dashboard</p>
-            </div>
-
+          {/* Form Container */}
+          <div className="bg-white rounded-lg">
             {error && (
-              <div className="bg-red-50 border-l-4 border-red-500 text-red-700 px-4 py-3 rounded mb-6 flex items-start gap-3">
-                <i className="fas fa-exclamation-circle mt-0.5"></i>
-                <div>
-                  <p className="font-medium">Error</p>
-                  <p className="text-sm">{error}</p>
-                </div>
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6 text-sm">
+                {error}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Email Field */}
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  E-mail
                 </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i className="fas fa-envelope text-gray-400"></i>
-                  </div>
-                  <input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
-                    placeholder="Enter your email address"
-                    required
-                  />
-                </div>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all"
+                  placeholder="example@email.com"
+                  required
+                />
               </div>
 
+              {/* Password Field */}
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                   Password
                 </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i className="fas fa-lock text-gray-400"></i>
-                  </div>
-                  <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
-                    placeholder="Enter your password"
-                    required
-                  />
-                </div>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all"
+                  placeholder="**********"
+                  required
+                />
               </div>
 
-              <div className="flex items-center justify-between pt-2">
+              {/* Remember Me & Forgot Password */}
+              <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-gray-900 focus:ring-gray-900 border-gray-300 rounded"
                   />
                   <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
                     Remember me
@@ -190,16 +152,17 @@ const Login: React.FC = () => {
                 </div>
                 <Link
                   to="/forgot-password"
-                  className="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
                 >
                   Forgot password?
                 </Link>
               </div>
 
+              {/* Sign In Button */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-gray-900 text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>
@@ -207,43 +170,47 @@ const Login: React.FC = () => {
                     <span>Signing in...</span>
                   </>
                 ) : (
-                  <>
-                    <i className="fas fa-sign-in-alt"></i>
-                    <span>Sign In</span>
-                  </>
+                  <span>Sign In</span>
                 )}
               </button>
             </form>
 
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <p className="text-center text-sm text-gray-600">
-                Don't have an account?{' '}
-                <Link 
-                  to="/signup" 
-                  className="font-semibold text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  Create an account
-                </Link>
-              </p>
-            </div>
-
-            {/* Additional Info for Mobile */}
-            <div className="md:hidden mt-8 pt-6 border-t border-gray-200">
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div>
-                  <i className="fas fa-shield-alt text-blue-600 text-2xl mb-2"></i>
-                  <p className="text-xs text-gray-600">Secure</p>
+            {/* Divider */}
+            <div className="mt-8">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
                 </div>
-                <div>
-                  <i className="fas fa-microscope text-blue-600 text-2xl mb-2"></i>
-                  <p className="text-xs text-gray-600">AI-Powered</p>
-                </div>
-                <div>
-                  <i className="fas fa-user-md text-blue-600 text-2xl mb-2"></i>
-                  <p className="text-xs text-gray-600">Professional</p>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">or sign in with</span>
                 </div>
               </div>
             </div>
+
+            {/* Social Login Buttons */}
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              {/* Add social login buttons here if needed */}
+            </div>
+
+            {/* Sign Up Link */}
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-600">
+                Don't have an account?{' '}
+                <Link 
+                  to="/signup" 
+                  className="font-medium text-gray-900 hover:text-gray-700 transition-colors"
+                >
+                  Sign up
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="mt-12 text-center">
+            <p className="text-xs text-gray-500">
+              © 2025. All rights reserved.
+            </p>
           </div>
         </div>
       </div>
@@ -252,4 +219,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-

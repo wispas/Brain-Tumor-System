@@ -17,19 +17,19 @@ const MainContent: React.FC = () => {
           <span className="text-blue-600"> {loading ? '...' : displayName}</span>
         </h2>
 
-        <p className="text-gray-600 mb-6">
-          Collect complete patient data and upload relevant diagnostic images (MRI/CT) for intelligent analysis.
+        {/* <p className="text-gray-600 mb-6">
+        
         </p>
 
         <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition shadow-lg">
           Patient Diagnosis
-        </button>
+        </button> */}
 
         <div className="mt-10 p-6 bg-gray-100 rounded-xl shadow flex items-start gap-4">
           <div className="text-blue-600 text-3xl font-bold">+</div>
           <div>
             <h4 className="text-lg font-semibold text-gray-800">Manual Diagnosis</h4>
-            <p className="text-gray-600 mb-3">Upload the MRI image to perform a Manual Diagnosis.</p>
+            <p className="text-gray-600 mb-3">  Collect complete patient data and upload relevant diagnostic images (MRI/CT) for intelligent analysis.</p>
              <button
                 onClick={() => navigate("/test")}
                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition shadow-lg"

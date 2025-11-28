@@ -71,7 +71,7 @@ const Sidebar: React.FC = () => {
         </button>
 
         <div className="border-t border-gray-700 pt-4">
-          <h4 className="text-lg font-semibold mb-2">Subscribe for updates</h4>
+          {/* <h4 className="text-lg font-semibold mb-2">Subscribe for updates</h4>
           <form className="flex flex-col gap-2">
             <input
               type="email"
@@ -85,7 +85,7 @@ const Sidebar: React.FC = () => {
             >
               Subscribe
             </button>
-          </form>
+          </form> */}
           <p className="text-gray-500 text-xs mt-4">© 2025 Medical Assistant</p>
         </div>
       </div>
